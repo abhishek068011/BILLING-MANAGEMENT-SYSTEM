@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author abhis
  */
 public class billing extends javax.swing.JFrame {
-public int finalTotal = 0;
+public double finalTotal = 0, gst = 0, totalAmount = 0;
     /**
      * Creates new form billing
      */
@@ -287,17 +287,17 @@ public int finalTotal = 0;
 
         jLabel19.setFont(new java.awt.Font("Fira Code", 1, 18)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(48, 3, 75));
-        jLabel19.setText("Total");
-        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 520, 66, -1));
+        jLabel19.setText("Sub Total");
+        getContentPane().add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 520, 110, -1));
 
         jLabel20.setFont(new java.awt.Font("Fira Code", 1, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(48, 3, 75));
-        jLabel20.setText("Paid Amount");
+        jLabel20.setText("GST (18%)");
         getContentPane().add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 580, -1, -1));
 
         jLabel21.setFont(new java.awt.Font("Fira Code", 1, 18)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(48, 3, 75));
-        jLabel21.setText("Return Amount");
+        jLabel21.setText("Total");
         getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 630, -1, -1));
 
         jTextField10.setFont(new java.awt.Font("Fira Code", 1, 18)); // NOI18N
@@ -393,12 +393,12 @@ public int finalTotal = 0;
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
         // TODO add your handling code here:
-        String paidAmount = jTextField11.getText();
-        int z = Integer.parseInt(paidAmount);
-        finalTotal = z - finalTotal;
-        String finalTotal1 = String.valueOf(finalTotal);
-        jTextField12.setText(finalTotal1);
-        jTextField12.setEditable(false);
+//        String paidAmount = jTextField11.getText();
+//        int z = Integer.parseInt(paidAmount);
+//        finalTotal = z - finalTotal;
+//        String finalTotal1 = String.valueOf(finalTotal);
+//        jTextField12.setText(finalTotal1);
+//        jTextField12.setEditable(false);
     }//GEN-LAST:event_jTextField11ActionPerformed
 
     private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
@@ -493,8 +493,12 @@ public int finalTotal = 0;
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         model.addRow(new Object[]{jTextField6.getText(), jTextField9.getText(), price, quantity, total});
         finalTotal = finalTotal + total;
-        String finalTotal1 = String.valueOf(finalTotal);
-        jTextField10.setText(finalTotal1);          
+        gst = ((double)finalTotal * 18) / 100;
+        totalAmount = finalTotal + gst;
+        String finalTotal1 = String.format("%.2f", finalTotal);
+        jTextField10.setText(finalTotal1); 
+        jTextField11.setText(String.format("%.2f", gst));
+        jTextField12.setText(String.format("%.2f", totalAmount));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -503,7 +507,7 @@ public int finalTotal = 0;
         String mobileNo = jTextField1.getText();
         String email = jTextField3.getText();
         String address = jTextField4.getText();
-        String path = "D:\\STORE BILLING PROJECT\\Bill PDF\\";
+        String path = "D:\\ACCIOJOB PROJECT\\INVOICES\\";
         com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
         
         try{
@@ -534,7 +538,7 @@ public int finalTotal = 0;
                 tb1.addCell(s);
             }
             doc.add(tb1);
-            Paragraph paragraph3 = new Paragraph("\n\n                                                                                                      Total Amount :    " + jTextField10.getText() + "\n                                                                                                      Paid Amount :     " + jTextField11.getText() + "\n                                                                                                      Return Amount :  " + jTextField12.getText() + "\n\n\n                                                   Thanks For Shopping ! Visit Again.\n                                                                     Store Name");
+            Paragraph paragraph3 = new Paragraph("\n\n                                                                                                         Sub Total :    " + jTextField10.getText() + "\n                                                                                                                 GST :      " + jTextField11.getText() + "\n                                                                                                                Total :     " + jTextField12.getText() + "\n\n\n                                                   Thanks For Shopping ! Visit Again.\n                                                                     Store Name");
             doc.add(paragraph3);
             JOptionPane.showMessageDialog(null, "Invoice Generated Successfully");
             setVisible(false);

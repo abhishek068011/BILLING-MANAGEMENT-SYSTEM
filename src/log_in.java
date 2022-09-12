@@ -5,7 +5,6 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author abhis
@@ -92,11 +91,10 @@ public class log_in extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        if(jTextField1.getText().equals("admin") &&jPasswordField1.getText().equals("admin")){
+        if (jTextField1.getText().equals("admin") && jPasswordField1.getText().equals("admin")) {
             setVisible(false);
             new home().setVisible(true);
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Incorrect Username or Password");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -104,17 +102,16 @@ public class log_in extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         int a = JOptionPane.showConfirmDialog(null, "Do you want to close the application", "Select", JOptionPane.YES_NO_OPTION);
-        if(a == 0){  // If user select Yes
+        if (a == 0) {  // If user select Yes
             System.exit(0);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
-        if(jCheckBox1.isSelected()){
-            jPasswordField1.setEchoChar((char)0);
-        }
-        else{
+        if (jCheckBox1.isSelected()) {
+            jPasswordField1.setEchoChar((char) 0);
+        } else {
             jPasswordField1.setEchoChar('*');
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
